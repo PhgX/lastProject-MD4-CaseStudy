@@ -49,6 +49,9 @@
                                     <div class="text-center pt-3">
                                         Bạn chưa có tài khoản? <a class="font-weight-bold" href="register.html">Đăng ký ngay</a>
                                     </div>
+                                    <div class="text-center pt-3">
+                                        Back to <a class="font-weight-bold" href="home.html">Home Page</a>
+                                    </div>
                                     
                                 </form>
                                 <hr class="my-4">
@@ -107,7 +110,7 @@
                 let token = {token: data.token};
                 let role = data.role;
                 if (role === 'admin') {
-                    location.href = 'index.html';
+                    location.href = 'admin.html';
                 } else {
                     location.href = 'home.html';
                 }
