@@ -112,6 +112,16 @@
                     location.href = 'home.html';
                 }
                 localStorage.setItem('accessToken', JSON.stringify(token));
+            },
+            error: function (err) {
+                console.log(err.responseJSON.message);
+                $("#password").val("");
+                $("#re_password").val("");
+                Swal.fire({
+                  icon: "Lỗi mất rồi!!",
+                  title: "Oops...",
+                  text: err.responseJSON.message,
+                });
             }
         })
     }
