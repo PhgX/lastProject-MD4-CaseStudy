@@ -83,16 +83,18 @@
     </nav>
     <div id="layoutSidenav">
       <div id="layoutSidenav_nav">
-          <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-              <div class="sb-sidenav-menu">
-                  <div class="nav">
-                      <div class="sb-sidenav-menu-heading">Core</div>
-                      <a class="nav-link" href="admin.html">
-                          <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                          Dashboard
-                      </a>
-                      <div class="sb-sidenav-menu-heading">Addons</div>
-                      <!-- <div class="sb-sidenav-menu-heading">Interface</div>
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <div class="sb-sidenav-menu">
+            <div class="nav">
+              <div class="sb-sidenav-menu-heading">Core</div>
+              <a class="nav-link" href="admin.html">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-tachometer-alt"></i>
+                </div>
+                Dashboard
+              </a>
+              <div class="sb-sidenav-menu-heading">Addons</div>
+              <!-- <div class="sb-sidenav-menu-heading">Interface</div>
                       <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                           <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                           Layouts
@@ -135,56 +137,60 @@
                               </div>
                           </nav>
                       </div> -->
-                      <a class="nav-link" href="users.html">
-                          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                          Users
-                      </a>
-                      <a class="nav-link" href="products.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Products
-                      </a>
-                      <a class="nav-link" href="categories.html">
-                          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                          Categories
-                      </a>
-                      <a class="nav-link" href="tags.html">
-                          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                          Tags
-                      </a>
-                      <a class="nav-link" href="discounts.html">
-                          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                          Discounts
-                      </a>
-                      <a class="nav-link" href="restaurants.html">
-                          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                          Restaurants
-                      </a>
-                      <a class="nav-link" href="roles.html">
-                          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                          Roles
-                      </a>
-                      <a class="nav-link" href="orders.html">
-                          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                          Orders
-                      </a>
-                  </div>
-              </div>
-              <div class="sb-sidenav-footer">
-                  <div class="small">Logged in as:</div>
-                  Start Bootstrap
+              <a class="nav-link" href="users.html">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Users
+              </a>
+              <a class="nav-link" href="products.html">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Products
+              </a>
+              <a class="nav-link" href="categories.html">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Categories
+              </a>
+              <a class="nav-link" href="tags.html">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Tags
+              </a>
+              <a class="nav-link" href="discounts.html">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Discounts
+              </a>
+              <a class="nav-link" href="restaurants.html">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Restaurants
+              </a>
+              <a class="nav-link" href="roles.html">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Roles
+              </a>
+              <a class="nav-link" href="orders.html">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Orders
+              </a>
+            </div>
+          </div>
+          <div class="sb-sidenav-footer">
+            <div class="small">Logged in as:</div>
+            Start Bootstrap
           </div>
         </nav>
       </div>
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <h1 class="mt-4"><i class="fas fa-table me-1"></i> List Category</h1>
+            <h1 class="mt-4">
+              <i class="fas fa-table me-1"></i> List Category
+            </h1>
             <ol class="breadcrumb mb-4">
               <li class="breadcrumb-item">
                 <a href="admin.html">Dashboard</a>
               </li>
               <li class="breadcrumb-item active">Categories</li>
+              
             </ol>
+            ol
             <div class="card mb-4">
               <div class="card-body">
                 <table id="datatablesSimple">
@@ -246,47 +252,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="../assets/lib/sweetalert2.js"></script>
-    <script>
-      const API_URL = "http://localhost:3000";
-      let token = JSON.parse(localStorage.getItem("accessToken"));
-      let totalUsers = 0;
-      if (!token) {
-        location.href = "login.html";
-      } else {
-        $(function () {
-          getCategoryList();
-        });
-      }
-      function getCategoryList() {
-        $.ajax({
-          type: "GET",
-          headers: {
-            Authorization: "Bearer " + token.token,
-          },
-          url: `${API_URL}/categories`,
-          success: function (data) {
-            totalCategory = data.length;
-            let html = "";
-            console.log(data);
-            for (let i = 0; i < data.length; i++) {
-              html += `<tr id="${data[i]._id}">
-        <td>${i + 1}</td>
-        <td>${data[i].name}</td>
-        <td>
-        <button type="button" onclick="showUpdateForm('${
-          data[i]._id
-        }')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Update
-        </button>
-        <button class="btn btn-danger" onclick="showConfirmDelete('${
-          data[i]._id
-        }')">Delete</button></td>
-    </tr>`;
-            }
-            $("#categories").html(html);
-          },
-        });
-      }
-    </script>
+    <script src="categories.js"></script>
   </body>
 </html>

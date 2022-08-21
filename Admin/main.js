@@ -1,5 +1,6 @@
 const API_URL = 'http://localhost:3000';
 let token = JSON.parse(localStorage.getItem('accessToken'));
+let role = localStorage.getItem('role')
 let totalProduct = 0;
 if (!token) {
     location.href = 'login.html'

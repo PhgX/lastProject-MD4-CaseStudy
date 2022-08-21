@@ -193,6 +193,7 @@
                       <th>#</th>
                       <th>Name</th>
                       <th>Price</th>
+                      <th>Image</th>
                       <th>Category</th>
                       <th>Restaurant</th>
                       <th>Discount</th>
@@ -204,6 +205,7 @@
                       <th>#</th>
                       <th>Name</th>
                       <th>Price</th>
+                      <th>Image</th>
                       <th>Category</th>
                       <th>Restaurant</th>
                       <th>Discount</th>
@@ -286,6 +288,7 @@
         <td>${i + 1}</td>
         <td>${data[i].name}</td>
         <td>${data[i].price}</td>
+        <td><img src="${API_URL}/${data[i].image}" alt=""></td>
         <td>${data[i].category.name}</td>
         <td>${data[i].restaurant.name}</td>
         <td>${data[i].discount.name}</td>
