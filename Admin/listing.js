@@ -337,10 +337,10 @@ function showListProduct() {
                                 <input hidden type="text" name="discount" id="discount" value="${discount}"/>
                                 <input hidden type="text" name="userId" id="userId" value="${userId}"/>
                                 <input hidden type="text" name="orderId" id="orderId" value="${orderId}"/>
-                                <input type="number" name="amount" id="amount" placeholder="Nhập số lượng" required/>
+                                <input type="number" name="amount" id="amount" class="form-label-group" placeholder="Nhập số lượng" required/>
                             </div>
                             <div >
-                                <button onclick="cartCheck()">Đặt hàng</button>
+                                <button onclick="cartCheck() " class="button-33">Đặt hàng</button>
                             </div>
                         </div>
                     </div>
@@ -419,10 +419,10 @@ function orderProduct() {
             html += `<p class="mb-2"><i class="icofont-ui-press text-danger food-item"></i>Tên sản phẩm: ${productName}
               Giá: ${productPrice}VNĐ x Số lượng: ${amount} <span class="float-right text-secondary">Thành tiền: ${totalMoney}VNĐ</span></p>`;
             $("#showCart").html(html);
-            let html2 = '';
-            html2 += `<p class="mb-0 font-weight-bold text-secondary">Tổng hóa đơn<span 
-            class="float-right text-dark"></span></p>`
-            let html1 = '';
+            // let html2 = '';
+            // html2 += `<p class="mb-0 font-weight-bold text-secondary">Tổng hóa đơn<span 
+            // class="float-right text-dark"></span></p>`
+            // let html1 = '';
             // html1 += `<span class="badge badge-success" id="countOrder">${countOrderDetail}</span>`
             // $('#countOrder').html(html1);
           },
