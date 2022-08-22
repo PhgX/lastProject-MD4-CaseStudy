@@ -29,6 +29,7 @@
     ></script>
   </head>
   <body class="sb-nav-fixed">
+    
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="admin.html">Start Bootstrap</a>
@@ -185,20 +186,28 @@
               </li>
               <li class="breadcrumb-item active">Discounts</li>
             </ol>
+          
+            <button type="button" onclick="showCreateForm()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Create new
+          </button>
+            
+          
             <div class="card mb-4">
               <div class="card-body">
                 <table id="datatablesSimple">
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Name</th>
+                      <th>Name</th>     
+                      <th>Value</th>                
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>#</th>
-                      <th>Name</th>
+                      <th>Name</th> 
+                      <th>Value</th>                     
                       <th>Action</th>
                     </tr>
                   </tfoot>
@@ -223,7 +232,29 @@
           </div>
         </footer>
       </div>
-    </div>
+    </div> 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="title">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" id="name">
+                  </div>
+                  <div class="form-group">
+                    <label for="value">Value</label>
+                    <input type="text" class="form-control" id="value">
+                </div>
+              </div>
+              <div class="modal-footer" id="footer">
+              </div>
+          </div>
+      </div>
+  </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
@@ -272,6 +303,7 @@
               html += `<tr id="${data[i]._id}">
         <td>${i + 1}</td>
         <td>${data[i].name}</td>
+        <td>${data[i].value}</td>
         <td>
         <button type="button" onclick="showUpdateForm('${
           data[i]._id
@@ -319,6 +351,111 @@ function deleteDiscount(id) {
         }
     })
 }
+function resetForm() {
+    $('#name').val();
+    $('#value').val();
+}
+function createDiscount() {
+    let name = $('#name').val();
+    let value =$('#value').val()
+  
+    let discount = {
+        name: name,
+        value:value
+    };
+    $.ajax({
+        type: 'POST',
+        url: `${API_URL}/discounts`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token.token
+        },
+        data: JSON.stringify(discount),
+        success: function (data) {
+            totalDiscount++;
+            let html = `<tr id="${data._id}">
+        <td>${totalDiscount}</td>
+        <td>${data.name}</td>
+        <td>${data.value}</td>
+        <td>
+        <button type="button" onclick="showUpdateForm('${data._id}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Update
+        </button>
+        <button class="btn btn-danger" onclick="showConfirmDelete('${data._id}')">Delete</button>
+        </td>
+    </tr>`
+            $('#discounts').append(html);
+            resetForm();
+        }
+    })
+}
+
+function showCreateForm() {
+
+    resetForm();
+    let html = `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="createDiscount()">Create</button>`
+    $('#title').html('Create Discount');
+    $('#footer').html(html);
+}
+
+function showUpdateForm(id) {
+    let html = `<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="updateDiscount('${id}')">Update</button>`
+    $('#title').html('Update Discount');
+    $('#footer').html(html);
+    getDiscount(id);
+}
+
+function updateDiscount(id) {
+    let name = $('#name').val();
+    let value =$('#value').val();
+    let discounts = {
+        name : name,
+        value : value
+    }
+    $.ajax({
+        type: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token.token
+        },
+        url: `${API_URL}/discounts/${id}`,
+        data: JSON.stringify(discounts),
+        success: function (data) {
+         
+            Swal.fire(
+                'Updated!',
+                'Discount has been updated.',
+                'success'
+            );
+      getDiscountList();
+    }})
+}
+function getDiscount(id) {
+    $.ajax({
+        type: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token.token
+        },
+        url: `${API_URL}/discounts/${id}`,
+        success: function (data) {
+            $('#name').val(data.name);
+            $('#value').val(data.value);
+            $.ajax({
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token.token
+                },
+                url: `${API_URL}/discounts`,
+                success: function (data) {
+                  $('#name').val(data.name);
+                  $('#value').val(data.value);
+                }
+            })
+        }
+    })
+}
     </script>
-  </body>
+    
 </html>
