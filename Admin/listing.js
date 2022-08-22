@@ -63,6 +63,7 @@ function showListProduct() {
                         </div>
                         <div>
                             <div class="list-card-badge">
+<<<<<<< HEAD
                                 <input hidden type="text" name="productId" id="productId-${data[i]._id}" value="${data[i]._id}"/>
                                 <input hidden type="text" name="productName" id="productName-${data[i]._id}" value="${data[i].name}"/>
                                 <input hidden type="text" name="productPrice" id="productPrice-${data[i]._id}" value="${data[i].price}"/>
@@ -71,6 +72,18 @@ function showListProduct() {
                             </div>
                             <div >
                                 <button onclick="addToCart('${data[i]._id}')">Đặt hàng</button>
+=======
+                                <input hidden type="text" name="productId" id="productId" value="${productID}"/>
+                                <input hidden type="text" name="productName" id="productName" value="${productName}"/>
+                                <input hidden type="text" name="productPrice" id="productPrice" value="${productPrice}"/>
+                                <input hidden type="text" name="discount" id="discount" value="${discount}"/>
+                                <input hidden type="text" name="userId" id="userId" value="${userId}"/>
+                                <input hidden type="text" name="orderId" id="orderId" value="${orderId}"/>
+                                <input type="number" name="amount" id="amount" class="form-label-group" placeholder="Nhập số lượng" required/>
+                            </div>
+                            <div >
+                                <button onclick="cartCheck() " class="button-33">Đặt hàng</button>
+>>>>>>> dev
                             </div>
                         </div>
                     </div>
@@ -207,6 +220,7 @@ function addToCart(productId) {
     console.log(discount)
     console.log(orderDetailPrice)
 
+
         }
   })
   } else {
@@ -215,6 +229,7 @@ function addToCart(productId) {
       title: "Oops...",
       text: 'Chưa nhập số lượng',
       footer: '<a href="home.html">Quay trở lại trang chủ</a>',
+
     });
   }
   
