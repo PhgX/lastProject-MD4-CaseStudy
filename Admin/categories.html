@@ -33,55 +33,28 @@
       <!-- Navbar Brand-->
       <a class="navbar-brand ps-3" href="admin.html">Start Bootstrap</a>
       <!-- Sidebar Toggle-->
-      <button
-        class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
-        id="sidebarToggle"
-        href="#!"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
+      <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
       <!-- Navbar Search-->
-      <form
-        class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"
-      >
-        <div class="input-group">
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Search for..."
-            aria-label="Search for..."
-            aria-describedby="btnNavbarSearch"
-          />
-          <button class="btn btn-primary" id="btnNavbarSearch" type="button">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
+      <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+          <div class="input-group">
+              <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+              <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+          </div>
       </form>
       <!-- Navbar-->
       <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            id="navbarDropdown"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            ><i class="fas fa-user fa-fw"></i
-          ></a>
-          <ul
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="navbarDropdown"
-          >
-            <li><a class="dropdown-item" href="#!">Settings</a></li>
-            <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#!">Logout</a></li>
-          </ul>
-        </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#!">Settings</a></li>
+                  <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li onclick="logout()"><a class="dropdown-item" href="login.html">Logout</a></li>
+              </ul>
+          </li>
       </ul>
-    </nav>
-    <div id="layoutSidenav">
+  </nav>
+  <div id="layoutSidenav">
       <div id="layoutSidenav_nav">
           <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
               <div class="sb-sidenav-menu">
@@ -140,8 +113,8 @@
                           Users
                       </a>
                       <a class="nav-link" href="products.html">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Products
+                          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                          Products
                       </a>
                       <a class="nav-link" href="categories.html">
                           <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -167,24 +140,34 @@
                           <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                           Orders
                       </a>
+                      <div class="sb-sidenav-menu-heading"></div>
+                      <a class="nav-link" href="login.html" onclick="logout()">
+                          <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                          Log out
+                      </a>
+                  
                   </div>
               </div>
               <div class="sb-sidenav-footer">
                   <div class="small">Logged in as:</div>
                   Start Bootstrap
-          </div>
-        </nav>
+              </div>
+          </nav>
       </div>
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <h1 class="mt-4"><i class="fas fa-table me-1"></i> List Category</h1>
+            <h1 class="mt-4">
+              <i class="fas fa-table me-1"></i> List Category
+            </h1>
             <ol class="breadcrumb mb-4">
               <li class="breadcrumb-item">
                 <a href="admin.html">Dashboard</a>
               </li>
               <li class="breadcrumb-item active">Categories</li>
+              
             </ol>
+            ol
             <div class="card mb-4">
               <div class="card-body">
                 <table id="datatablesSimple">
@@ -246,47 +229,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="../assets/lib/sweetalert2.js"></script>
-    <script>
-      const API_URL = "http://localhost:3000";
-      let token = JSON.parse(localStorage.getItem("accessToken"));
-      let totalUsers = 0;
-      if (!token) {
-        location.href = "login.html";
-      } else {
-        $(function () {
-          getCategoryList();
-        });
-      }
-      function getCategoryList() {
-        $.ajax({
-          type: "GET",
-          headers: {
-            Authorization: "Bearer " + token.token,
-          },
-          url: `${API_URL}/categories`,
-          success: function (data) {
-            totalCategory = data.length;
-            let html = "";
-            console.log(data);
-            for (let i = 0; i < data.length; i++) {
-              html += `<tr id="${data[i]._id}">
-        <td>${i + 1}</td>
-        <td>${data[i].name}</td>
-        <td>
-        <button type="button" onclick="showUpdateForm('${
-          data[i]._id
-        }')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Update
-        </button>
-        <button class="btn btn-danger" onclick="showConfirmDelete('${
-          data[i]._id
-        }')">Delete</button></td>
-    </tr>`;
-            }
-            $("#categories").html(html);
-          },
-        });
-      }
-    </script>
+    <script src="categories.js"></script>
   </body>
 </html>
