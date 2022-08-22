@@ -34,15 +34,15 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-9 col-lg-8 mx-auto pl-5 pr-5">
-                                <h3 class="login-heading mb-4">Wellcome back!</h3>
+                                <h3 class="login-heading mb-4">Chào mừng trở lại!</h3>
                                 <form>
                                     <div class="form-label-group">
                                         <input type="text" class="form-control" id="username">
-                                        <label for="username">User Name</label>                                        
+                                        <label for="username">Tên đăng nhập</label>                                        
                                     </div>
                                     <div class="form-label-group">
                                         <input type="password" class="form-control" id="password">
-                                        <label for="password">Password</label>
+                                        <label for="password">Mật khẩu</label>
                                     </div>
                                     <button type="button" onclick="login()"
                                         class="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2">Đăng nhập</button>
@@ -50,7 +50,7 @@
                                         Bạn chưa có tài khoản? <a class="font-weight-bold" href="register.html">Đăng ký ngay</a>
                                     </div>
                                     <div class="text-center pt-3">
-                                        Back to <a class="font-weight-bold" href="home.html">Home Page</a>
+                                        Trở về <a class="font-weight-bold" href="home.html">Trang chủ</a>
                                     </div>
                                     
                                 </form>
@@ -112,7 +112,7 @@
                 if (role === 'admin') {
                     location.href = 'admin.html';
                 } else {
-                    location.href = 'home.html';
+                    location.href = 'listing.html';
                 }
                 localStorage.setItem('accessToken', JSON.stringify(token));
 

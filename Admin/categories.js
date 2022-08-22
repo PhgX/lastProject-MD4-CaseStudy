@@ -9,6 +9,9 @@ const API_URL = "http://localhost:3000";
           getCategoryList();
         });
       }
+      function logout() {
+        localStorage.clear()
+    }
       function getCategoryList() {
         $.ajax({
           type: "GET",

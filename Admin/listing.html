@@ -46,7 +46,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-shopping-basket"></i> Giỏ hàng
-                            <span class="badge badge-success" id="countOrder">5</span>
+                            <span class="badge badge-success" id="countOrder"></span>
                         </a>
                         <div class="dropdown-menu dropdown-cart-top p-0 dropdown-menu-right shadow-sm border-0">
                             <div class="dropdown-cart-top-body border-top p-4" id="showCart">
@@ -524,17 +524,5 @@
     <script src="../assets/lib/sweetalert2.js"></script>
 </body>
 <script src="listing.js"></script>
-<script>
-    token = JSON.parse(localStorage.getItem("accessToken"));
-    // console.log(token);
-    //   role = data.role;
-      if (!token) {
-        location.href = "login.html";
-      } else {
-        $(function () {
-            showListProduct();
-        });
-      }
-</script>
 
 </html>
